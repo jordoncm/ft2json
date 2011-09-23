@@ -1,7 +1,6 @@
 import csv
 import json
 import StringIO
-import tornado.ioloop
 import tornado.web
 import urllib
 import urllib2

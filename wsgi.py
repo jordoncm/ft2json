@@ -6,9 +6,12 @@ import wsgiref.handlers
 
 import handlers
 
-application = tornado.wsgi.WSGIApplication(([
+application = tornado.wsgi.WSGIApplication([
     (r'/', handlers.IndexHandler)
 ])
 
-if __name__ == '__main__':
+def main():
     wsgiref.handlers.CGIHandler().run(application)
+
+if __name__ == '__main__':
+    main()
