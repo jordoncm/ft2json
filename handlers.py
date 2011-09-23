@@ -1,6 +1,9 @@
 import csv
 import httplib
-import json
+try:
+    import json
+except ImportError:
+    from django.utils import simplejson as json
 import StringIO
 import tornado.web
 import urllib
@@ -101,6 +104,7 @@ class IndexHandler(tornado.web.RequestHandler):
                 output['error'] = ['Bad input parameters.']
         else:
             success = False
+            output['error'] = ['Missing sql parameter.']
         
         output['success'] = success
         
