@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- You do NOT need these stylesheets use styles of your choosing. -->
+    <link href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css" rel="stylesheet" type="text/css" />
+    <link href="http://yui.yahooapis.com/2.9.0/build/base/base-min.css" rel="stylesheet" type="text/css" />
+    <link href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Use the full URL in your page. -->
+    <script src="./ft2json.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+function simple() {
+    ft2json.query(
+        'SELECT * FROM 1597897',
+        callbackObject
+    );
+}
+
+function simpleJSON() {
+    ft2json.query(
+        'SELECT * FROM 1597897',
+        callbackJSON,
+        {
+            responseType : 'json'
+        }
+    );
+}
+
+function simpleAjax() {
+    ft2json.query(
+        'SELECT * FROM 1597897',
+        callbackAjax,
+        {
+            responseType : 'ajax'
+        }
+    );
+}
+
+function paging() {
+    ft2json.query(
+        'SELECT * FROM 1597897',
+        callbackObject,
+        {
+            start : 1,
+            limit : 2
+        }
+    );
+}
+
+function authentication() {
+    ft2json.query(
+        'SHOW TABLES',
+        callbackObject,
+        {
+            access_token : document.getElementById('accessToken').value
+        }
+    );
+}
+
+function callbackAjax(result) {
+    text = [];
+    
+    text.push('readyState : ' + result.readyState);
+    text.push('status : ' + result.status);
+    text.push('statusText : ' + result.statusText);
+    text.push('responseText : ' + result.responseText);
+    
+    document.getElementById('result').value = text.join('\n');
+}
+
+function callbackJSON(result) {
+    document.getElementById('result').value = result;
+}
+
+function callbackObject(result) {
+    text = [];
+    
+    for(i in result) {
+        if(i == 'data') {
+            text.push(i + ' : ');
+            for(var j = 0; j < result[i].length; j++) {
+                for(k in result[i][j]) {
+                    text.push('    ' + k + ' : ' + result[i][j][k]);
+                }
+            }
+        } else {
+            if(i == 'count' || i == 'start' || i == 'limit' || i == 'success') {
+                text.push(i + ' : ' + result[i]);
+            }
+        }
+    }
+    
+    document.getElementById('result').value = text.join('\n');
+}
+    </script>
+  </head>
+  <body>
+    <h1>Fusion Tables to JSON Samples</h1>
+    <p>Use the buttons below to invoke the various samples and view the output 
+    in the text area below. View the source of this page to see the code for the
+    samples.</p>
+    <table style="float: left;">
+      <tbody>
+        <tr>
+          <td>Simple</td>
+          <td><input type="button" value="Run" onclick="simple();" /><br /></td>
+        </tr>
+        <tr>
+          <td>Simple, returning JSON string</td>
+          <td><input type="button" value="Run" onclick="simpleJSON();" /><br /></td>
+        </tr>
+        <tr>
+          <td>Simple, returning AJAX response object</td>
+          <td><input type="button" value="Run" onclick="simpleAjax();" /><br /></td>
+        </tr>
+        <tr>
+          <td>Paging, using start and limit</td>
+          <td><input type="button" value="Run" onclick="paging();" /><br /></td>
+        </tr>
+        <tr>
+          <td>
+            Authentication, to allow modifying queries.<br />
+            <span style="font-size: smaller;">Paste OAuth2 access token below:<br /></span>
+            <input id="accessToken" type="text" />
+          </td>
+          <td><input type="button" value="Run" onclick="authentication();" /><br /></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="float: left;">&nbsp;</div>
+    <div style="float: left;">
+      <textarea id="result" style="font-family: monospace; height: 500px; width: 500px;"></textarea>
+    </div>
+  </body>
+</html>
