@@ -103,26 +103,79 @@ function callbackObject(result) {
     <table style="float: left;">
       <tbody>
         <tr>
-          <td>Simple</td>
+          <td>
+            Simple<br /><br />
+            <pre>
+ft2json.query(
+    'SELECT * FROM 1597897',
+    callbackObject
+);
+            </pre>
+          </td>
           <td><input type="button" value="Run" onclick="simple();" /><br /></td>
         </tr>
         <tr>
-          <td>Simple, returning JSON string</td>
+          <td>
+            Simple, returning JSON string<br /><br />
+            <pre>
+ft2json.query(
+    'SELECT * FROM 1597897',
+    callbackJSON,
+    {
+        responseType : 'json'
+    }
+);
+            </pre>
+          </td>
           <td><input type="button" value="Run" onclick="simpleJSON();" /><br /></td>
         </tr>
         <tr>
-          <td>Simple, returning AJAX response object</td>
+          <td>
+            Simple, returning AJAX response object<br /><br />
+            <pre>
+ft2json.query(
+    'SELECT * FROM 1597897',
+    callbackAjax,
+    {
+        responseType : 'ajax'
+    }
+);
+            </pre>
+          </td>
           <td><input type="button" value="Run" onclick="simpleAjax();" /><br /></td>
         </tr>
         <tr>
-          <td>Paging, using start and limit</td>
+          <td>
+            Paging, using start and limit<br /><br />
+            <pre>
+ft2json.query(
+    'SELECT * FROM 1597897',
+    callbackObject,
+    {
+        start : 1,
+        limit : 2
+    }
+);
+            </pre>
+          </td>
           <td><input type="button" value="Run" onclick="paging();" /><br /></td>
         </tr>
         <tr>
           <td>
             Authentication, to allow modifying queries.<br />
             <span style="font-size: smaller;">Paste OAuth2 access token below:<br /></span>
-            <input id="accessToken" type="text" />
+            <input id="accessToken" type="text" /><br /><br />
+            <pre>
+ft2json.query(
+    'SHOW TABLES',
+    callbackObject,
+    {
+        access_token : document.getElementById(
+            'accessToken'
+        ).value
+    }
+);
+            </pre>
           </td>
           <td><input type="button" value="Run" onclick="authentication();" /><br /></td>
         </tr>
@@ -130,7 +183,7 @@ function callbackObject(result) {
     </table>
     <div style="float: left;">&nbsp;</div>
     <div style="float: left;">
-      <textarea id="result" style="font-family: monospace; height: 500px; width: 500px;"></textarea>
+      <textarea id="result" style="font-family: monospace; height: 500px; width: 300px;"></textarea>
     </div>
   </body>
 </html>
