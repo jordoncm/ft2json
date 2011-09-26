@@ -8,6 +8,8 @@ import handlers
 
 application = tornado.wsgi.WSGIApplication([
     (r'/', handlers.IndexHandler),
+    (r'/q/?', handlers.QueryHandler),
+    (r'/query/?', handlers.QueryHandler),
     (r'/api/(.*)', tornado.web.StaticFileHandler, {'path' : './api'})
 ])
 

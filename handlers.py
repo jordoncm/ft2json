@@ -6,9 +6,18 @@ except ImportError:
     from django.utils import simplejson as json
 import StringIO
 import tornado.web
+import tornado.template
 import urllib
 
 class IndexHandler(tornado.web.RequestHandler):
+    def get(self):
+        loader = tornado.template.Loader('templates')
+        self.write(loader.load('index.html').generate())
+    
+    def post(self):
+        self.get()
+
+class QueryHandler(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-Type', 'application/json')
         

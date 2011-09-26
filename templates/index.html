@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css" rel="stylesheet" type="text/css" />
+    <link href="http://yui.yahooapis.com/2.9.0/build/base/base-min.css" rel="stylesheet" type="text/css" />
+    <link href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" rel="stylesheet" type="text/css" />
+    
+    <title>Fusion Tables to JSON</title>
+  </head>
+  <body>
+    <div style="margin: auto; width: 780px;">
+      <h1>Fusion Tables to JSON</h1>
+      <p>Fusion Tables to JSON is a simple interface that accepts 
+      <a href="http://code.google.com/apis/fusiontables/">Google Fusion Tables 
+      API</a> queries and passes the query to the Fusion Tables API and 
+      translates the response into <a href="http://www.json.org/">JSON</a> 
+      instead of <a href="http://en.wikipedia.org/wiki/Comma-separated_values">
+      CSV</a>.</p>
+      <p>For example take a look at the following query: SELECT * FROM 
+      197872</p>
+      <ul>
+        <li>
+          From Fusion Tables directly:<br />
+          <a href="https://www.google.com/fusiontables/api/query?sql=SELECT%20*%20FROM%20197872">
+          https://www.google.com/fusiontables/api/query?sql=SELECT * FROM 197872
+          </a>
+        </li>
+        <li>&nbsp;</li>
+        <li>
+          From FT2JSON:<br />
+          <a href="./q?sql=SELECT%20*%20FROM%20197872">
+          http://ft2json.appspot.com/q?sql=SELECT * FROM 197872</a>
+        </li>
+      </ul>
+      <h2>JSON Structure</h2>
+      <p>There is a little extra structure to the JSON over the CSV result from 
+      Fusion Tables to make it a little easier to page results and parse. A 
+      sample of the structure is below.</p>
+      <pre>
+{
+    "count" : 100,
+    "start" : 0,
+    "limit" : 100,
+    "data"  : [
+        { ... Fusion Table data ... },
+        ...
+    ]
+}
+      </pre>
+      <h2>Query Parameters</h2>
+      <p>The query service for FT2JSON supports some extra parameters to allow 
+      paging data and authentication to Google services. You can send all 
+      requests as GET or POST regardless of the type of Fusion Tables API query 
+      you are doing.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>start</td>
+            <td>integer</td>
+            <td>0</td>
+            <td>The index of the result set to start at. Only supported when 
+            doing a SELECT query.</td>
+          </tr>
+          <tr>
+            <td>limit</td>
+            <td>integer</td>
+            <td>100</td>
+            <td>Limits the total number of results returned. Only supported 
+            when doing a SELECT query.</td>
+          </tr>
+          <tr>
+            <td>access_token</td>
+            <td>string</td>
+            <td>&nbsp;</td>
+            <td>OAuth2 access token to use to authenitcate to Fusion Tables. 
+            This will allow for doing modifiying queries, working with 
+            protected data, etc. More details below.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Javascript API</h2>
+      <p>There is also simple Javascript API that gives you an easy way to 
+      access Fusion Tables data. This way you can work with Fusion Tables 
+      entirely on the client side.</p>
+      <p>To access the Javascript API follow the sample code below.</p>
+      <pre>
+&lt;script src="http://ft2json.appspot.com/api/ft2json.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+
+ft2json.query(
+    'SELECT * FROM 197872', /* Fusion Tables query. */
+    function(result) {
+        /* Callback function. */
+        alert(typeof result);
+    },
+    {
+        /* Optional parameters. */
+        start : 25,
+        limit : 50
+    }
+);
+
+&lt;/script&gt;
+      </pre>
+      <p>Live samples can be found <a href="./api/samples.html">here</a>.</p>
+      <h2>Authentication</h2>
+      <p>You can send authenticated requests to Fusion Tables through this 
+      service using OAuth2 bearer tokens. However it is up to your application 
+      to work with 
+      <a href="http://code.google.com/apis/accounts/docs/OAuth2.html">Google's 
+      OAuth2 client API</a> to generate the tokens. Once you have your OAuth2 
+      bearer token generated you can add it to your requests with the 
+      access_token parameter through both the query service or the Javascript 
+      API.</p>
+      <pre>
+http://ft2json.appspot.com/q?sql=SELECT * FROM 197872&access_token=...
+      </pre>
+      <p>or</p>
+      <pre>
+ft2json.query(
+    'SELECT * FROM 197872',
+    function(result) {
+        alert(typeof result);
+    },
+    {
+        access_token : '...'
+    }
+);
+      </pre>
+      <br />
+      <p>Created by <a href="http://www.finefrog.com">Jordon Mears</a></p>
+    </div>
+  </body>
+</html>

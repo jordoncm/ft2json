@@ -6099,7 +6099,7 @@ ft2json.query = function(sql, callback, parameters) {
         }
         
         new Ajax.Request(
-            '/',
+            '/q/',
             {
                 method : method,
                 parameters : parameters,

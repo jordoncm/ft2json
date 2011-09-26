@@ -94,30 +94,32 @@ function callbackObject(result) {
     document.getElementById('result').value = text.join('\n');
 }
     </script>
+    <title>Fusion Tables to JSON - Samples</title>
   </head>
   <body>
-    <h1>Fusion Tables to JSON Samples</h1>
-    <p>Use the buttons below to invoke the various samples and view the output 
-    in the text area below. View the source of this page to see the code for the
-    samples.</p>
-    <table style="float: left;">
-      <tbody>
-        <tr>
-          <td>
-            Simple<br /><br />
-            <pre>
+    <div style="margin: auto; width: 780px;">
+      <h1>Fusion Tables to JSON Samples</h1>
+      <p>Use the buttons below to invoke the various samples and view the 
+      output in the text area below. View the source of this page to see the 
+      code for the samples.</p>
+      <table style="float: left;">
+        <tbody>
+          <tr>
+            <td>
+              Simple.<br /><br />
+              <pre>
 ft2json.query(
     'SELECT * FROM 1597897',
     callbackObject
 );
-            </pre>
-          </td>
-          <td><input type="button" value="Run" onclick="simple();" /><br /></td>
-        </tr>
-        <tr>
-          <td>
-            Simple, returning JSON string<br /><br />
-            <pre>
+              </pre>
+            </td>
+            <td><input type="button" value="Run" onclick="simple();" /><br /></td>
+          </tr>
+          <tr>
+            <td>
+              Simple, returning JSON string.<br /><br />
+              <pre>
 ft2json.query(
     'SELECT * FROM 1597897',
     callbackJSON,
@@ -125,14 +127,14 @@ ft2json.query(
         responseType : 'json'
     }
 );
-            </pre>
-          </td>
-          <td><input type="button" value="Run" onclick="simpleJSON();" /><br /></td>
-        </tr>
-        <tr>
-          <td>
-            Simple, returning AJAX response object<br /><br />
-            <pre>
+              </pre>
+            </td>
+            <td><input type="button" value="Run" onclick="simpleJSON();" /><br /></td>
+          </tr>
+          <tr>
+            <td>
+              Simple, returning AJAX response object.<br /><br />
+              <pre>
 ft2json.query(
     'SELECT * FROM 1597897',
     callbackAjax,
@@ -140,14 +142,14 @@ ft2json.query(
         responseType : 'ajax'
     }
 );
-            </pre>
-          </td>
-          <td><input type="button" value="Run" onclick="simpleAjax();" /><br /></td>
-        </tr>
-        <tr>
-          <td>
-            Paging, using start and limit<br /><br />
-            <pre>
+              </pre>
+            </td>
+            <td><input type="button" value="Run" onclick="simpleAjax();" /><br /></td>
+          </tr>
+          <tr>
+            <td>
+              Paging, using start and limit.<br /><br />
+              <pre>
 ft2json.query(
     'SELECT * FROM 1597897',
     callbackObject,
@@ -156,16 +158,16 @@ ft2json.query(
         limit : 2
     }
 );
-            </pre>
-          </td>
-          <td><input type="button" value="Run" onclick="paging();" /><br /></td>
-        </tr>
-        <tr>
-          <td>
-            Authentication, to allow modifying queries.<br />
-            <span style="font-size: smaller;">Paste OAuth2 access token below:<br /></span>
-            <input id="accessToken" type="text" /><br /><br />
-            <pre>
+              </pre>
+            </td>
+            <td><input type="button" value="Run" onclick="paging();" /><br /></td>
+          </tr>
+          <tr>
+            <td>
+              Authentication, to allow modifying queries.<br />
+              <span style="font-size: smaller;">Paste OAuth2 access token below:<br /></span>
+              <input id="accessToken" type="text" /><br /><br />
+              <pre>
 ft2json.query(
     'SHOW TABLES',
     callbackObject,
@@ -175,15 +177,16 @@ ft2json.query(
         ).value
     }
 );
-            </pre>
-          </td>
-          <td><input type="button" value="Run" onclick="authentication();" /><br /></td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="float: left;">&nbsp;</div>
-    <div style="float: left;">
-      <textarea id="result" style="font-family: monospace; height: 500px; width: 300px;"></textarea>
+              </pre>
+            </td>
+            <td><input type="button" value="Run" onclick="authentication();" /><br /></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="float: left;">&nbsp;</div>
+      <div style="float: left;">
+        <textarea id="result" style="font-family: monospace; height: 500px; width: 300px;"></textarea>
+      </div>
     </div>
   </body>
 </html>
