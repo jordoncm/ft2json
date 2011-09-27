@@ -19,8 +19,6 @@ class IndexHandler(tornado.web.RequestHandler):
 
 class QueryHandler(tornado.web.RequestHandler):
     def get(self):
-        self.set_header('Content-Type', 'application/json')
-        
         getCommands = [
             'show',
             'describe',
@@ -117,7 +115,13 @@ class QueryHandler(tornado.web.RequestHandler):
         
         output['success'] = success
         
-        self.write(json.dumps(output))
+        jsonp = self.get_argument('jsonp', '')
+        if jsonp != '':
+            self.set_header('Content-Type', 'text/javascript')
+            self.write(jsonp + '(' + json.dumps(output) + ');')
+        else:
+            self.set_header('Content-Type', 'application/json')
+            self.write(json.dumps(output))
     
     def post(self):
         self.get()

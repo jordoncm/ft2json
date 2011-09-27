@@ -84,6 +84,14 @@
             This will allow for doing modifiying queries, working with 
             protected data, etc. More details below.</td>
           </tr>
+          <tr>
+            <td>jsonp</td>
+            <td>string</td>
+            <td>&nbsp;</td>
+            <td>Name of a callback function defined in the target page's 
+            Javascript. This allows direct embedding of result data with script 
+            tags. More details below.</td>
+          </tr>
         </tbody>
       </table>
       <h2>Javascript API</h2>
@@ -135,6 +143,25 @@ ft2json.query(
     }
 );
       </pre>
+      <h2>JSONP Support</h2>
+      <p>If you are just looking for a simple way to grab some data out of 
+      Fusion Tables and use it on a web page, this interface will also support 
+      <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>. JSONP gives you 
+      an easy way to include JSON data into your scripts by embedding a single 
+      script tag.</p>
+      <p>To use JSONP with FT2JSON, simply add a parameter to your query called 
+      jsonp with the value of the name of the Javascript callback function you 
+      want the result data passed to.</p>
+      <p>For example:</p>
+      <pre>
+&lt;script src="http://ft2json.appspot.com/q?sql=SELECT%20*%20FROM%20197872&jsonp=myCallback" type="text/javascript"&gt;&lt;/script&gt;
+      </pre>
+      <p>This will return Javascript code like:</p>
+      <pre>
+myCallback({"data" : [ ... RESULT JSON ... ], "success" : true ... });
+      </pre>
+      <p>This is just an extra way to grab some data and work with it without 
+      using the Javascript API described above.</p>
       <br />
       <p>Created by <a href="http://www.finefrog.com">Jordon Mears</a></p>
     </div>
