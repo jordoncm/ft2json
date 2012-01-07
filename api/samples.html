@@ -17,26 +17,6 @@ function simple() {
     );
 }
 
-function simpleJSON() {
-    ft2json.query(
-        'SELECT * FROM 1597897',
-        callbackJSON,
-        {
-            responseType : 'json'
-        }
-    );
-}
-
-function simpleAjax() {
-    ft2json.query(
-        'SELECT * FROM 1597897',
-        callbackAjax,
-        {
-            responseType : 'ajax'
-        }
-    );
-}
-
 function paging() {
     ft2json.query(
         'SELECT * FROM 1597897',
@@ -56,21 +36,6 @@ function authentication() {
             access_token : document.getElementById('accessToken').value
         }
     );
-}
-
-function callbackAjax(result) {
-    text = [];
-    
-    text.push('readyState : ' + result.readyState);
-    text.push('status : ' + result.status);
-    text.push('statusText : ' + result.statusText);
-    text.push('responseText : ' + result.responseText);
-    
-    document.getElementById('result').value = text.join('\n');
-}
-
-function callbackJSON(result) {
-    document.getElementById('result').value = result;
 }
 
 function callbackObject(result) {
@@ -115,36 +80,6 @@ ft2json.query(
               </pre>
             </td>
             <td><input type="button" value="Run" onclick="simple();" /><br /></td>
-          </tr>
-          <tr>
-            <td>
-              Simple, returning JSON string.<br /><br />
-              <pre>
-ft2json.query(
-    'SELECT * FROM 1597897',
-    callbackJSON,
-    {
-        responseType : 'json'
-    }
-);
-              </pre>
-            </td>
-            <td><input type="button" value="Run" onclick="simpleJSON();" /><br /></td>
-          </tr>
-          <tr>
-            <td>
-              Simple, returning AJAX response object.<br /><br />
-              <pre>
-ft2json.query(
-    'SELECT * FROM 1597897',
-    callbackAjax,
-    {
-        responseType : 'ajax'
-    }
-);
-              </pre>
-            </td>
-            <td><input type="button" value="Run" onclick="simpleAjax();" /><br /></td>
           </tr>
           <tr>
             <td>
