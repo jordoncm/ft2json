@@ -4,6 +4,7 @@ try:
     import json
 except ImportError:
     from django.utils import simplejson as json
+import logging
 import StringIO
 import tornado.web
 import tornado.template
@@ -69,7 +70,10 @@ class QueryHandler(tornado.web.RequestHandler):
                 if accessToken != '':
                     parameters['access_token'] = accessToken
                 
-                connection = httplib.HTTPSConnection('www.google.com')
+                connection = httplib.HTTPSConnection(
+                    'www.google.com',
+                    timeout=120
+                )
                 if method == 'get':
                     connection.request(
                         'GET',
@@ -86,6 +90,8 @@ class QueryHandler(tornado.web.RequestHandler):
                 file = StringIO.StringIO(response.read())
                 
                 if response.status == 200:
+                    csv.field_size_limit(1000000000)
+                    
                     count = 0
                     keys = []
                     data = []
@@ -106,7 +112,8 @@ class QueryHandler(tornado.web.RequestHandler):
                 else:
                     success = False
                     output['error'] = [file.getvalue()]    
-            except:
+            except Exception as e:
+                logging.error(e)
                 success = False
                 output['error'] = ['Bad input parameters.']
         else:
@@ -114,6 +121,8 @@ class QueryHandler(tornado.web.RequestHandler):
             output['error'] = ['Missing sql parameter.']
         
         output['success'] = success
+        
+        self.set_header('Access-Control-Allow-Origin', '*')
         
         jsonp = self.get_argument('jsonp', '')
         if jsonp != '':
