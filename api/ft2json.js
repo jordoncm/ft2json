@@ -25,7 +25,8 @@ ft2json.query = function(sql, callback, parameters) {
         
         parameters.sql = sql;
         
-        var src = 'http://ft2json.appspot.com/q/?sql=' + encodeURIComponent(parameters.sql);
+        var host = (window.location.port == '80' || window.location.port == '443' || window.location.port == '') ? window.location.hostname : window.location.hostname + ':' + window.location.port;
+        var src = window.location.protocol + '//' + host + '/q/?sql=' + encodeURIComponent(parameters.sql);
         var i = null;
         for(i in parameters) {
             src += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(parameters[i]);
