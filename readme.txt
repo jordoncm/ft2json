@@ -1,6 +1,20 @@
 FT2JSON - Fusion Tables to JSON
 
+Fusion Tables to JSON is a simple interface that accepts Google Fusion Tables 
+API queries and passes the query to the Fusion Tables API and translates the 
+response into JSON instead of CSV.
 
+INSTALLING
+
+This application can be deployed to Google App Engine as well as on any machine 
+running Python 2.7.
+
+To deploy to App Engine: Edit the app.yaml accordingly and deploy using the App 
+Engine SDK utilities.
+
+To deploy in Python: Place the folder anywhere on the target machine, open a 
+terminal and change directory (cd) into the ft2json folder and execute python 
+server.py.
 
 LICENSE
 
