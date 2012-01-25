@@ -42,7 +42,7 @@
         <li>
           From FT2JSON:<br />
           <a href="./q?sql=SELECT%20*%20FROM%201j1kKW9s9CrtZ6_o6MdC-xb0YNWb73rQQYENmzQ">
-          http://ft2json.appspot.com/q?sql=SELECT * FROM 1j1kKW9s9CrtZ6_o6MdC-xb0YNWb73rQQYENmzQ</a>
+          {{ urlPrefix }}/q?sql=SELECT * FROM 1j1kKW9s9CrtZ6_o6MdC-xb0YNWb73rQQYENmzQ</a>
         </li>
       </ul>
       <h2>JSON Structure</h2>
@@ -113,7 +113,7 @@
       entirely on the client side.</p>
       <p>To access the Javascript API follow the sample code below.</p>
       <pre>
-&lt;script src="http://ft2json.appspot.com/api/ft2json.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="{{ urlPrefix }}/api/ft2json.js" type="text/javascript"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 
 ft2json.query(
@@ -142,7 +142,7 @@ ft2json.query(
       access_token parameter through both the query service or the Javascript 
       API.</p>
       <pre>
-http://ft2json.appspot.com/q?sql=SELECT * FROM 1j1kKW9s9CrtZ6_o6MdC-xb0YNWb73rQQYENmzQ&access_token=...
+{{ urlPrefix }}/q?sql=SELECT * FROM 1j1kKW9s9CrtZ6_o6MdC-xb0YNWb73rQQYENmzQ&access_token=...
       </pre>
       <p>or</p>
       <pre>
@@ -168,7 +168,7 @@ ft2json.query(
       <p>For example:</p>
       <pre>
 &lt;script 
-src="http://ft2json.appspot.com/q?sql=SELECT%20*%20FROM%201j1kKW9s9CrtZ6_o6MdC-xb0YNWb73rQQYENmzQ&jsonp=myCallback" 
+src="{{ urlPrefix }}/q?sql=SELECT%20*%20FROM%201j1kKW9s9CrtZ6_o6MdC-xb0YNWb73rQQYENmzQ&jsonp=myCallback" 
 type="text/javascript"&gt;&lt;/script&gt;
       </pre>
       <p>This will return Javascript code like:</p>

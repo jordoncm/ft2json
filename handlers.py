@@ -26,8 +26,16 @@ import urllib
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
+        urlPrefix = ''
+        if True:
+            urlPrefix = self.request.protocol + '://' + self.request.host
+        else:
+            urlPrefix = self.request.protocol + '://' + self.request.host
+        
         loader = tornado.template.Loader('templates')
-        self.write(loader.load('index.html').generate())
+        self.write(loader.load('index.html').generate(
+            urlPrefix = urlPrefix
+        ))
     
     def post(self):
         self.get()
