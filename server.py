@@ -23,7 +23,8 @@ application = tornado.web.Application([
     (r'/', handlers.IndexHandler),
     (r'/q/?', handlers.QueryHandler),
     (r'/query/?', handlers.QueryHandler),
-    (r'/api/(.*)', tornado.web.StaticFileHandler, {'path' : './api'})
+    (r'/api/(.*)', tornado.web.StaticFileHandler, {'path' : './api'}),
+    (r'/static/(.*)', tornado.web.StaticFileHandler, {'path' : './static'})
 ])
 
 if __name__ == '__main__':

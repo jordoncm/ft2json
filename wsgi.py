@@ -24,7 +24,8 @@ application = tornado.wsgi.WSGIApplication([
     (r'/', handlers.IndexHandler),
     (r'/q/?', handlers.QueryHandler),
     (r'/query/?', handlers.QueryHandler),
-    (r'/api/(.*)', tornado.web.StaticFileHandler, {'path' : './api'})
+    (r'/api/(.*)', tornado.web.StaticFileHandler, {'path' : './api'}),
+    (r'/static/(.*)', tornado.web.StaticFileHandler, {'path' : './static'})
 ])
 
 def main():
