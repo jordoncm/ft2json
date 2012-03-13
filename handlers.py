@@ -40,6 +40,14 @@ class IndexHandler(tornado.web.RequestHandler):
     def post(self):
         self.get()
 
+class QueryBrowserHandler(tornado.web.RequestHandler):
+    def get(self):
+        loader = tornado.template.Loader('templates')
+        self.write(loader.load('query.html').generate())
+    
+    def post(self):
+        self.get()
+
 class QueryHandler(tornado.web.RequestHandler):
     def get(self):
         getCommands = [

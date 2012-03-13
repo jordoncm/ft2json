@@ -23,6 +23,7 @@ application = tornado.web.Application([
     (r'/', handlers.IndexHandler),
     (r'/q/?', handlers.QueryHandler),
     (r'/query/?', handlers.QueryHandler),
+    (r'/query-browser.html', handlers.QueryBrowserHandler),
     (r'/api/(.*)', tornado.web.StaticFileHandler, {'path' : './api'}),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path' : './static'})
 ])
