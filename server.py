@@ -25,7 +25,8 @@ application = tornado.web.Application([
     (r'/query/?', handlers.QueryHandler),
     (r'/query-browser.html', handlers.QueryBrowserHandler),
     (r'/api/(.*)', tornado.web.StaticFileHandler, {'path' : './api'}),
-    (r'/static/(.*)', tornado.web.StaticFileHandler, {'path' : './static'})
+    (r'/static/(.*)', tornado.web.StaticFileHandler, {'path' : './static'}),
+    (r'/(crossdomain\.xml)', tornado.web.StaticHandler, {'path' : './'})
 ])
 
 if __name__ == '__main__':
